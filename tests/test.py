@@ -1,6 +1,6 @@
-import bsvxpy
+import bsvxpy as bsv
 
 # here's the syntax on how to call the objects
 
-a = bsvxpy.bsvxBlank.Blank()
+test_blank = bsv.Blank()
 print (a)
