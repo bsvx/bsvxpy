@@ -2,5 +2,8 @@
 
 import bsvxDataTypes.core
 
+def placeholder():
+    return True
+
 def test_placeholder():
-    pass
+    assert placeholder() == True
