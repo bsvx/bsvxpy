@@ -3,9 +3,9 @@
 class Blob:
     def __init__(self, data, length):
         # _data is bytestring
-        self._data = self.set_data(data)
+        self._data = data
         # _length is integer
-        self._length = self.set_length(length)
+        self._length = length
 
     def get_data(self):
         return self._data

@@ -1,16 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxBlank import Blank
-from bsvxBlob import Blob
-from bsvxFloat import Float
-from bsvxHeader import Header
-from bsvxHeaderLong import HeaderLong
-from bsvxIntegerShort import IntegerShort
-from bsvxRecord import Record
-from bsvxRecordLong import RecordLong
-from bsvxStringLong import StringLong
-from bsvxStringShort import StringShort
-
+from bsvxDataTypes import *
 
 
 class Reader:

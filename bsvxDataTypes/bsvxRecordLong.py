@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxRecord import Record
+from bsvxDataTypes.bsvxRecord import Record
 
 class RecordLong(Record):
     def __init__(self, count, data, length):
@@ -8,7 +8,7 @@ class RecordLong(Record):
         # _data is dictionary
         super().__init__(count, data)
         # _length is integer
-        self._length = self.set_length(length)
+        self._length = length
 
     def get_length(self):
         return self._length

@@ -3,7 +3,7 @@
 class StringShort:
     def __init__(self, data):
         # _data is string
-        self._data = self.set_data(data)
+        self._data = data
 
     def get_data(self):
         return self._data

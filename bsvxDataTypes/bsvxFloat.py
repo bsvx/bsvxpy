@@ -11,9 +11,9 @@ class Precision(Enum):
 class Float:
     def __init__(self, data, precision):
         # _data is integer
-        self._data = self.set_data(data)
+        self._data = data
         # _precision is enum
-        self._precision = self.set_precision(precision)
+        self._precision = precision
 
     def get_data(self):
         return self._data

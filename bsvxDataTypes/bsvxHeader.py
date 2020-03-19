@@ -3,9 +3,9 @@
 class Header:
     def __init__(self, count, data):
         # _count is integer
-        self._count = self.set_count(count)
+        self._count = count
         # _data is dictionary
-        self._data = self.set_data(data)
+        self._data = data
 
     def get_count(self):
         return self._count
