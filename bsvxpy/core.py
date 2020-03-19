@@ -1,18 +1,5 @@
 #!/usr/bin/env python
 
-from . import bsvxBlank
-from . import bsvxBlob
-from . import bsvxFloat
-from . import bsvxHeader
-from . import bsvxHeaderLong
-from . import bsvxIntegerLong
-from . import bsvxIntegerShort
-from . import bsvxRecord
-from . import bsvxRecordLong
-from . import bsvxStringLong
-from . import bsvxStringShort
-
-
 class Reader:
     """
     Takes in a .bsvx file and returns a reader object that can iterate over
@@ -32,6 +19,3 @@ class Writer:
 
     def writerow(self, data):
         pass
-
-def blank():
-    return bsvxBlank.Blank()
