@@ -47,6 +47,12 @@ source env/bin/activate
 
 Full instructions for how to enter a virtual environment [can be found here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
+### A note about Python Virtual Environments
+
+If you are using an IDE such as VSCode, your virtual environment is most likely automatically initialized for you. If that is the case, you can skip the previous instructions from the Installing section.
+It should also be noted that your machine may use a different command to execute python programs (e.i. '''py''''), in which case you should use that command instead of the default '''python3''' command used in this documentation.
+If you are concerned about your python installation using a different version of python to build the module, use '''py --version''' to check the version of python your environment is using.
+
 ### Development note: 
 
 bsvxpy has a requirements.txt file, you must execute ```pip install -r requirements.txt``` in the bsvxpy/ folder if you plan on developing the repo further. 
