@@ -1,16 +1,14 @@
 #!/usr/bin/env python
 
-from bsvxpy.bsvxIntegerShort import IntegerShort
+from bsvxpy import IntegerShort
 
 class IntegerLong(IntegerShort):
-    def __init__(self, data, length):
-        # _data is integer
-        super().__init__(data)
-        # _length is integer
-        self._length = length
+    _long_length = None
 
-    def get_length(self):
-        return self._length
+    def __init__(self, input):
+        mask = bytearray("07")
+        self._long_length = int.from_bytes(input & mask) + 1
 
-    def set_length(self, length):
-        self._length= length
+        self._length = int.from_bytes(self.read(None, self._long_length))
+        #todo: zig-zag decoding of the 
+        self._data = int.from_bytes(self.read(None, self._length))

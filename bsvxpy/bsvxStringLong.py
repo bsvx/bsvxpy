@@ -1,16 +1,13 @@
 #!/usr/bin/env python
 
-from bsvxpy.bsvxStringShort import StringShort
+from bsvxpy import StringShort
 
 class StringLong(StringShort):
-    def __init__(self, data, length):
-        # _data is string
-        super().__init__(data)
-        # _length is integer
-        self._length = length
+    _long_length = None
 
-    def get_length(self):
-        return self._length
+    def __init__(self, input):
+        mask = bytearray("07")
+        self._long_length = int.from_bytes(input & mask)
 
-    def set_length(self, length):
-        self._length= length
+        self._length = int.from_bytes(self.read(None, self._long_length))
+        self._data = self.read(None, self._length).decode('utf-8')

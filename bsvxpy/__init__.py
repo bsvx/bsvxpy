@@ -1,6 +1,7 @@
 # placeholder for now, good practice to have one in a subfolder
 
 from .core import *
+from .bsvxDataType import bsvxDataType
 from .bsvxBlank import Blank
 from .bsvxBlob import Blob
 from .bsvxFloat import Float

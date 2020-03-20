@@ -1,17 +1,15 @@
 #!/usr/bin/env python
 
-from bsvxpy.bsvxHeader import Header
+from bsvxpy import Record
 
-class HeaderLong(Header):
-    def __init__(self, count, data, length):
-        # _count is integer
-        # _data is dictionary
-        super().__init__(count, data)
-        # _length is integer
-        self._length = length
+class RecordLong(Header):
+    _count = 0
+    _long_length = 0
+    def __init__(self, input):
+        mask = bytearray("07")
+        self._long_length = int.from_bytes(input & mask) + 1
 
-    def get_length(self):
-        return self._length
+        self._count = int.from_bytes(self.read(None, self._long_length))
 
-    def set_length(self, length):
-        self._length = length
+    def get_count(self):
+        return self._count

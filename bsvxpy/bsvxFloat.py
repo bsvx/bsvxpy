@@ -1,28 +1,13 @@
 #!/usr/bin/env python
 
-from enum import Enum
+from bsvxpy import bsvxDataType
 
-class Precision(Enum):
-    HALF = 0
-    SINGLE = 1
-    DOUBLE = 2
-    TRIPLE = 3
+class Float(bsvxDataType):
+    def __init__(self, input):
+        mask = bytearray("07")
+        self._length = int.from_bytes(input & mask)
 
-class Float:
-    def __init__(self, data, precision):
-        # _data is integer
-        self._data = data
-        # _precision is enum
-        self._precision = precision
-
-    def get_data(self):
-        return self._data
-
-    def get_precision(self):
-        return self._precision
-
-    def set_data(self, data):
-        self._data = data
-
-    def set_precision(self, precision):
-        self._precision = precision
+        if self._length == 1:
+            self._data = float.fromhex(self.read(None, 32).hex())
+        elif self._length == 2:
+            self._data = float.fromhex(self.read(None, 64).hex())

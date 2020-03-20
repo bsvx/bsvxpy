@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
-class Blank:
+import bsvxpy
+
+class Blank(bsvxpy.bsvxDataType):
     def __init__(self):
-        pass
+        self._length = 0
+        return

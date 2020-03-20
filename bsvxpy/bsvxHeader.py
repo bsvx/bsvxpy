@@ -1,20 +1,13 @@
 #!/usr/bin/env python
 
-class Header:
-    def __init__(self, count, data):
-        # _count is integer
-        self._count = count
-        # _data is dictionary
-        self._data = data
+from bsvxpy import bsvxDataType
+
+class Header(bsvxDataType):
+    _count = 0
+    
+    def __init__(self, input):
+        mask = bytearray("0F")
+        self._count = int.from_bytes(input & mask)
 
     def get_count(self):
         return self._count
-
-    def get_data(self):
-        return self._data
-
-    def set_count(self, count):
-        self._count = count
-
-    def set_data(self, data):
-        self._data = data
