@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import bsvxpy as bsv
+from .bsvxHeader import Header
 
 class Reader:
     """
@@ -23,7 +23,7 @@ class Reader:
         """
         # header to return, has garbage values for testing purposes for now
         # TODO: implement this to actually loop through data
-        ret = bsv.Header(-1, 0)
+        ret = Header(-1, 0)
         return ret
 
 class Writer:

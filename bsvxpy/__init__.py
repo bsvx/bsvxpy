@@ -1,4 +1,6 @@
-# placeholder for now, good practice to have one in a subfolder
+# This is to make the import calls nicer for when we are using the library for tests 
+# and for when people want to call it as a module. For development within this folder, 
+# use imports in the style below, instead of importing bsvxpy as a module within itself. 
 
 from .core import *
 from .bsvxDataType import bsvxDataType
