@@ -20,11 +20,11 @@ python3.7
 First, ensure the lastest python is installed on your system 
 
 ```
-noah@noah:~$ python3 --version
+python3 --version
 Python 3.7.7
 ```
 
-Next, install pip and activate the virtual environment in the parent directory of this repo.
+Next, install pip and activate the virtual environment.
 
 ```
 python3 -m pip install --user --upgrade pip
@@ -40,7 +40,7 @@ Create and enter your virtual environment.
 python3 -m venv env
 ```
 
-You will now notice an env/ folder in your directory as well as the bsvxpy/ folder. You can enter the virtual environment by executing:
+You will now notice an env/ folder in your directory. You can enter the virtual environment by executing:
 ```
 source env/bin/activate
 ```
@@ -51,19 +51,33 @@ Full instructions for how to enter a virtual environment [can be found here](htt
 
 bsvxpy has a requirements.txt file, you must execute ```pip install -r requirements.txt``` in the bsvxpy/ folder if you plan on developing the repo further. 
 
-Once you have successfully entered the virtual environment and you are in a directory containing the top-level bsvxpy/ folder, you may install it using pip with the command 
+This can also be done by running the command ```make init```.
+
+Once you have successfully entered the virtual environment, you may install bsvxpy using pip with the command 
 
 ```
-pip install bsvxpy/
+pip install .
 ```
 
-The trailing slash is important because pip knows to call a directory.
+This will install the module in the current directory for use through the virutal environment and pip.
 
-Once you are done installing, you may navigate to the tests/ folder and execute test.py in your virtual environment. If you get the output: ```<bsvxpy.bsvxBlank.Blank object at 0x7f6ff5bb4910>``` then you know you installed it properly.
+Once you are done installing, simply run each Makefile command in order to ensure your environment is fully working.
+
+## The Makefile
+
+The Makefile in this repo has three options: ```init```, ```remake```, and ```test```. Here are the usages for each:
+
+> ```init```: simply runs ```pip install -r requirements.txt``` and is used to update requirements for development
+
+> ```remake```: uninstalls bsvxpy from the virtual environment then installs it again, effectively "recompiling" the library. This should be done after changes are made in the bsvxpy/ folder and before testing begins.
+
+> ```test```: simply runs ```pytest``` to run all tests in the test/ folder
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Before you run any tests, make sure to re-compile by running ```make remake```
+
+Simply run ```make test``` or ```pytest``` and it will do everything automatically.
 
 ### Break down into end to end tests
 
