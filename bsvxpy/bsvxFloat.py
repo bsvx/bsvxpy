@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxpy import bsvxDataType
+from .bsvxDataType import bsvxDataType
 
 class Float(bsvxDataType):
     def __init__(self, input):

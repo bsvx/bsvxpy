@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxpy import bsvxDataType
+from .bsvxDataType import bsvxDataType
 
 class Record(bsvxDataType):
     _count = 0

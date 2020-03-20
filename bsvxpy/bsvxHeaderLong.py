@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from bsvxpy import Record
+from .bsvxHeader import Header
 
-class RecordLong(Header):
+class HeaderLong(Header):
     _count = 0
     _long_length = 0
     def __init__(self, input):

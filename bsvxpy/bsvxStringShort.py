@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxpy import bsvxDataType
+from .bsvxDataType import bsvxDataType
 
 class StringShort(bsvxDataType):
 

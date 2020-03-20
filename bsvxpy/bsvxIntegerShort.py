@@ -1,8 +1,6 @@
 #!/usr/bin/env python
-
-import bsvxpy
-
-class IntegerShort(bsvxpy.bsvxDataType):
+from .bsvxDataType import bsvxDataType
+class IntegerShort(bsvxDataType):
     def __init__(self, input):
         mask = bytearray("07")
         self._length = 0

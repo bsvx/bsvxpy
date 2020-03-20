@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxpy import IntegerShort
+from .bsvxIntegerShort import IntegerShort
 
 class IntegerLong(IntegerShort):
     _long_length = None

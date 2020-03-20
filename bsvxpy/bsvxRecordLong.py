@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxpy import Record
+from .bsvxRecord import Record
 
 class RecordLong(Record):
     _count = 0

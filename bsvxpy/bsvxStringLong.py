@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from bsvxpy import StringShort
+from .bsvxStringShort import StringShort
 
 class StringLong(StringShort):
     _long_length = None
