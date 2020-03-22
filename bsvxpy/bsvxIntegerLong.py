@@ -6,9 +6,9 @@ class IntegerLong(IntegerShort):
     _long_length = None
 
     def __init__(self, input):
-        mask = bytearray("07")
-        self._long_length = int.from_bytes(input & mask) + 1
+        mask = int('111', 2)
+        self._long_length = (input & mask) + 1
 
-        self._length = int.from_bytes(self.read(None, self._long_length))
-        #todo: zig-zag decoding of the 
-        self._data = int.from_bytes(self.read(None, self._length))
+        self._length = int(self.read(None, self._long_length), 16)
+        #todo: zig-zag decoding
+        self._data = int(self.read(None, self._length), 16)

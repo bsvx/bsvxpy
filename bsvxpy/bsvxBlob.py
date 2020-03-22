@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-class Blob:
+from .bsvxDataType import bsvxDataType
+
+class Blob(bsvxDataType):
     def __init__(self, data, length):
         # _data is bytestring
         self._data = data

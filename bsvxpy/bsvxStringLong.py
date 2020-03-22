@@ -6,8 +6,8 @@ class StringLong(StringShort):
     _long_length = None
 
     def __init__(self, input):
-        mask = bytearray("07")
-        self._long_length = int.from_bytes(input & mask)
+        mask = int('111', 2)
+        self._long_length = input & mask
 
-        self._length = int.from_bytes(self.read(None, self._long_length))
+        self._length = int(self.read(None, self._long_length), 16)
         self._data = self.read(None, self._length).decode('utf-8')

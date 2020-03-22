@@ -5,7 +5,7 @@ from .bsvxDataType import bsvxDataType
 class StringShort(bsvxDataType):
 
     def __init__(self, input):
-        mask = bytearray("7F")
+        mask = int('111', 2)
         self._length = int.from_bytes(input & mask)
         
         # _data is string

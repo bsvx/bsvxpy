@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 class bsvxDataType:
     _length = None
@@ -13,4 +14,4 @@ class bsvxDataType:
         return self._data
 
     def read(self, fileHandle, length):
-        return bytearray('00')
+        return hex(0)
