@@ -14,4 +14,4 @@ class bsvxDataType:
         return self._data
 
     def read(self, fileHandle, length):
-        return hex(0)
+        return hex(0) 
