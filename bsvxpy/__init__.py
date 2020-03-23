@@ -15,3 +15,5 @@ from .bsvxRecord import Record
 from .bsvxRecordLong import RecordLong
 from .bsvxStringShort import StringShort
 from .bsvxStringLong import StringLong
+
+_data_types_list = []

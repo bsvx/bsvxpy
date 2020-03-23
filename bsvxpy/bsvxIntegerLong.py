@@ -12,5 +12,5 @@ class IntegerLong(IntegerShort):
         # (input & mask) will map to integer values [0 - 7], + 1 to shift the range
         self._length = (input & mask) + 1
 
-        #todo: zig-zag decoding
+        #TODO: for other objects, handle hex decoding as returned from read()
         self._data = int(self.read(None, self._length), 16)
