@@ -3,11 +3,15 @@
 from .bsvxStringShort import StringShort
 
 class StringLong(StringShort):
-    _long_length = None
+    # Long String = 128 + [0,7] : 1-8 bytes giving the length of a UTF-8 encoded string, followed by said string
+    _mask = int('111', 2)
+    _long_length = None     # Intermediate variable used to store the length of the bytes that encode the length of the string
 
     def __init__(self, input):
-        mask = int('111', 2)
-        self._long_length = input & mask
+        self._long_length = input & self._mask
+        return
 
-        self._length = int(self.read(None, self._long_length), 16)
-        self._data = self.read(None, self._length).decode('utf-8')
+    # "Long" datatypes require a read operation to fetch 'length'
+    def read_length(self, fileHandle):
+        self._length = int(fileHandle.read(self._long_length), 16)
+        return

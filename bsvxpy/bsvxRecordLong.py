@@ -3,13 +3,19 @@
 from .bsvxRecord import Record
 
 class RecordLong(Record):
-    _count = 0
-    _long_length = 0
+    # Long Record = 208 + [0,7] : 1-8 bytes giving the number of fields in the Record
+    _mask = int('111', 2)
+    _long_length = None     # Intermediate variable used to store the length of the bytes that encode the length of the 'field_count'
+
     def __init__(self, input):
-        mask = int('111', 2)
-        self._long_length = input & mask
+        # A Long Record uses 1-8 bytes of data to represent its 'field_count'
+        # (input & _mask) maps to integer values [0 - 7], + 1 to shift the range
+        self._long_length = (input & self._mask) + 1
+        return
 
-        self._count = int(self.read(None, self._long_length), 16)
-
-    def get_count(self):
-        return self._count
+    # Helper Functions
+    # ----------------
+    # "Long" datatypes require a read operation to fetch 'length'
+    def read_length(self, fileHandle):
+        self._length = int(fileHandle.read(self._long_length), 16)
+        return

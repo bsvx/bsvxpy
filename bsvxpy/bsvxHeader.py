@@ -3,11 +3,14 @@
 from .bsvxDataType import bsvxDataType
 
 class Header(bsvxDataType):
-    _count = 0
+    # Header = 168 + [0,15] : Beginning of Header with 0-15 fields
+    _mask = int('1111', 2)
+    _field_count = None     # Number of fields associated with this Header
     
     def __init__(self, input):
-        mask = int('1111', 2)
-        self._count = input & mask
+        self._field_count = input & self._mask
 
+    # Accessor Functions
+    # ------------------
     def get_count(self):
-        return self._count
+        return self._field_count

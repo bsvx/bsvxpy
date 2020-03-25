@@ -3,10 +3,8 @@
 from .bsvxDataType import bsvxDataType
 
 class StringShort(bsvxDataType):
+    # Short String  = [1,127] : UTF-8 encoded string of byte length 1-127
+    _mask = int('01111111', 2)
 
     def __init__(self, input):
-        mask = int('111', 2)
-        self._length = int.from_bytes(input & mask)
-        
-        # _data is string
-        self._data = (self.read(None, self._length)).decode('utf-8')
+        self._length = input & self._mask

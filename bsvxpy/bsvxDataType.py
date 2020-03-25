@@ -1,25 +1,40 @@
 #!/usr/bin/env python
 
 class bsvxDataType:
-    _length = None # the number of bytes we need to read after reading the size bit
-    _data = None # the hex representation of the data
+    # Private Member variables
+    # ------------------------
+    _length = None  # (int, base 10), the number of bytes we need to read after reading the size bit 
+    _data = None    # (int, base 16) the hex representation of the data
+    _mask = None    # (int, base 2) corresponding bits in the input byte used to encode length or data
     
-    
+    # Constructor
+    # -----------
     def __init__(self):
         return
 
-    def get_length(self):
+    # Accessor Functions
+    # ------------------
+    def get_length(self):   # Returns the stored _length variable as a base 10 int
         return self._length
     
-    def get_data(self):
-        # convert from binary/hex to decimal
+    def get_data(self):     # Returns the stored _data variable as a base 16 int
         return self._data
 
-    def read(self, fileHandle, length):
-        # return to the object the hex representation of the data we read
-        # the data will be as long as length is
-        return hex(0) 
+    # I/O Functions
+    # -------------
+    # fileHandle: the file handle associated with an OPEN file
+    # length: the number of half-bytes to read
+    def read(self, fileHandle, length = None): # Returns a base 16 int that corresponds to the data read from the file
+        input = int("0", 2)
+        if length == None:  # Read from a .csv file
+            # Read until we encounter a ',' character
+            # Convert input to a base 16 int
+            pass
+        else:               # Read from a .bsv file
+            input = fileHandle.read(length) # Already in base 16 format
+
+        return input
     
     def write(self, fileHandle):
-        with open(fileHandle) as file:
-            file.write(self._data)
+            fileHandle.write(self._data)
+            return
