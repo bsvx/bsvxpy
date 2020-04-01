@@ -8,3 +8,13 @@ class StringShort(bsvxDataType):
 
     def __init__(self, input):
         self._length = input & self._mask
+
+    # From UTF-8 String to Hex
+    def to_binary_encoding(self):
+        self._hex_data = hex(int(self._data, 0)) # Int(x, 0) has the 'x' parameter interpreted literally
+        return 
+    
+    # From Hex to UTF-8 String
+    def from_binary_encoding(self):
+        self._data = bytes.fromhex(self._hex_data).decode('utf-8')
+        return

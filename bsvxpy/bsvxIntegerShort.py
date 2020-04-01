@@ -11,6 +11,6 @@ class IntegerShort(bsvxDataType):
     # __init__ structure preserved for congruency throughout library
     def __init__(self, input):
         self._length = 0                    # Short Int does not read data from file
-        self._hex_data = input & self._mask # store the raw hexadecimal data in _hex_data
-        self._data = self._hex_data         # data is the 0 - 7 value encoded in the input byte
+        self._hex_data = input & self._mask # hex_data is the 0 - 7 value encoded in the input byte
+        self.from_binary_encoding()       
         return

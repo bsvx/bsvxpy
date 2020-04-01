@@ -2,6 +2,7 @@
 
 from .bsvxDataType import bsvxDataType
 from enum import Enum
+from struct import pack, unpack
 
 class Precision(Enum):
     HALF = 0
@@ -28,13 +29,19 @@ class Float(bsvxDataType):
     # Helper Functions
     # ----------------
     # Should be called when writing to BSV OBJECT from a BSV FILE
-    def decode(self, input): # returns a base 16 int with binary encoding
-        #TODO convert input from zigzag encoding to binary encoding
-        return input
-
-    # Should be called when writing to BSV FILE from a BSV OBJECT
-    def encode(self): # returns a base 16 int with zigzag encoding
-        #TODO convert input from binary encoding to zigzag encoding
+    def decode(self, input): # returns a float with binary encoding
+        if self._precision == Precision.SINGLE:
+            self._data = unpack('f', input) # Converts IEEE 754 input to binary encoding
+        elif self._precision == Precision.DOUBLE:
+            self._data = unpack('d', input) # Converts IEEE 754 input to binary encoding
+            
         return self._data
 
+    # Should be called when writing to BSV FILE from a BSV OBJECT
+    def encode(self): # returns float with zigzag encoding
+        if self._precision == Precision.SINGLE:
+            self._hex_data = pack('f', self._data)
+        elif self._precision == Precision.DOUBLE:
+            self._hex_data = pack('d', self._data)
 
+        return self._hex_data

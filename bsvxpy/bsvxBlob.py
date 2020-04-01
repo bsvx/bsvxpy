@@ -13,6 +13,8 @@ class Blob(bsvxDataType):
         self._long_length = (input & self._mask) + 1
         return
 
+    # Accessor Functions
+    # ------------------
     # "Long" datatypes require a read operation to fetch 'length'
     def read_length(self, fileHandle):
         self._length = int(fileHandle.read(self._long_length), 16)

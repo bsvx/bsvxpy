@@ -3,10 +3,10 @@
 class bsvxDataType:
     # Private Member variables
     # ------------------------
-    _length = None  # (int, base 10) the number of bytes we need to read after reading the size bit 
-    _hex_data = None # (int, base 16) the hex representation of the data
-    _data = None    # (Subclass dependent) the data representation in the "correct" type, i.e. int for ShortInt, string for ShortString, etc.
-    _mask = None    # (int, base 2) corresponding bits in the input byte used to encode length or data
+    _length = None      # (int, base 10) the number of bytes we need to read after reading the size bit 
+    _hex_data = None    # (int, base 16) the hex representation of the data
+    _data = None        # (Subclass dependent) the data representation in the "correct" type, i.e. int for ShortInt, string for ShortString, etc.
+    _mask = None        # (int, base 2) corresponding bits in the input byte used to encode length or data
     
     # Constructor
     # -----------
@@ -39,3 +39,19 @@ class bsvxDataType:
     def write(self, fileHandle):
             fileHandle.write(self._data)
             return
+
+    # Helper Functions
+    # ----------------
+    # returns the binary value associated with the subclasses datatype
+    # INPUT: operates on the _data member variable
+    # EFFECTS: assigns new value to _hex_data member variable
+    def to_binary_encoding(self):
+        self._hex_data = int(self._data, 0)
+        return 
+
+    # returns the typed value associated with the subclasses datatype
+    # INPUT: operates on the _hex_data member variable
+    # EFFECTS: assigns new value to _data member variable
+    def from_binary_encoding(self):
+        self._data = self._hex_data
+        return
