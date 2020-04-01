@@ -4,7 +4,7 @@ import pytest
 test_integer = int('10001011', 2) # 139 in decimal
 
 print(test_integer)
-int_test = bsv.IntegerSmall(test_integer)
+int_test = bsv.IntegerShort(test_integer)
 
 def test_int_short_init():
     assert int_test.get_data() == 3
