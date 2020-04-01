@@ -9,4 +9,5 @@ class IntegerShort(bsvxDataType):
     def __init__(self, input):
         self._length = 0                # Small Int does not read data from file
         self._hex_data = input & self._mask # data is the 0 - 7 value encoded in the input byte
+        self._data = int(self._hex_data, 16)
         return
