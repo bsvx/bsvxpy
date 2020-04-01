@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from .bsvxIntegerSmall import IntegerSmall
+from .bsvxIntegerShort import IntegerShort
 
-class IntegerLong(IntegerSmall):
+class IntegerLong(IntegerShort):
     # Long int = 144 + [0,7] : A zig-zag encoded integer using 1-8 bytes
     _mask = int('111', 2)
 

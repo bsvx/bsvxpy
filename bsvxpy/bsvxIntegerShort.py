@@ -2,7 +2,7 @@
 
 from .bsvxDataType import bsvxDataType
 
-class IntegerSmall(bsvxDataType):
+class IntegerShort(bsvxDataType):
     # Small Int = 136 + [0, 7] : An integer in the range 0-7
     _mask = int('111', 2)
 
