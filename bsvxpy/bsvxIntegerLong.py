@@ -10,3 +10,10 @@ class IntegerLong(IntegerShort):
         # A Long Integer uses 1-8 bytes of data to represent a value
         # (input & _mask) maps to integer values [0 - 7], + 1 to shift the range
         self._length = (input & self._mask) + 1
+
+
+    def from_zigzag(self, data):
+        self._data = (data >> 1)^ -(data & 1)
+
+    def to_zigzag(self, data):
+        self._data = (data >> (self._length * 8)) ^ (data << 1)
