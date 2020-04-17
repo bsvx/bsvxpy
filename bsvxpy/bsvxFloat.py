@@ -2,9 +2,9 @@
 
 from .bsvxDataType import bsvxDataType
 from enum import Enum
+from struct import pack, unpack
 
 class Precision(Enum):
-    HALF = 0
     SINGLE = 1
     DOUBLE = 2
 
@@ -18,23 +18,25 @@ class Float(bsvxDataType):
 
         # Determines the Precision of the float       (E/M, bias)              Exponent bits / Significand bits
         # -----------------------------------------------------------------------------------------------------
-        if self._precision == Precision.HALF:       # (5/11, exp. bias: 15)           0000 0 / 000 0000 0000
-            self._length = 4
-        elif self._precision == Precision.SINGLE:   # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
+        if self._precision == Precision.SINGLE:   # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
             self._length = 8
         elif self._precision == Precision.DOUBLE:   # (11/53, exp. bias: 1023) 0000 0000 000 / 0 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
             self._length = 16
 
     # Helper Functions
     # ----------------
-    # Should be called when writing to BSV OBJECT from a BSV FILE
-    def decode(self, input): # returns a base 16 int with binary encoding
-        #TODO convert input from zigzag encoding to binary encoding
-        return input
+    # Conversion functions are meant to be called after a Read() function has read in the data
 
-    # Should be called when writing to BSV FILE from a BSV OBJECT
-    def encode(self): # returns a base 16 int with zigzag encoding
-        #TODO convert input from binary encoding to zigzag encoding
-        return self._data
+    # Converts IEEE-754 floats to Binary representation
+    def to_binary(self, data):
+        if (self._precision == Precision.SINGLE):
+            self._data = unpack('f', data)
+        elif (self._precision == Precision.DOUBLE):
+            self._data = unpack('d', data)
 
-
+    # Converts Binary floats to IEEE-754 representation
+    def to_IEEE(self, data):
+        if (self._precision == Precision.SINGLE):
+            self._data = pack('f', data)
+        elif (self._precision == Precision.DOUBLE):
+            self._data = pack('d', data)

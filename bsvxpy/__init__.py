@@ -9,7 +9,7 @@ from .bsvxBlob import Blob
 from .bsvxFloat import Float
 from .bsvxHeader import Header
 from .bsvxHeaderLong import HeaderLong
-from .bsvxIntegerSmall import IntegerSmall
+from .bsvxIntegerShort import IntegerShort
 from .bsvxIntegerLong import IntegerLong
 from .bsvxRecord import Record
 from .bsvxRecordLong import RecordLong

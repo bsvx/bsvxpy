@@ -19,6 +19,7 @@ class bsvxDataType:
         184:'header_long',
         192:'record',
         208:'record_long'} # permanent spot for parsing data types, static list of all types and their values.
+
     
     # Constructor
     # -----------
@@ -51,3 +52,19 @@ class bsvxDataType:
     def write(self, fileHandle):
             fileHandle.write(self._data)
             return
+
+    # Helper Functions
+    # ----------------
+    # returns the binary value associated with the subclasses datatype
+    # INPUT: operates on the _data member variable
+    # EFFECTS: assigns new value to _hex_data member variable
+    def to_binary_encoding(self):
+        self._hex_data = int(self._data, 0)
+        return 
+
+    # returns the typed value associated with the subclasses datatype
+    # INPUT: operates on the _hex_data member variable
+    # EFFECTS: assigns new value to _data member variable
+    def from_binary_encoding(self):
+        self._data = self._hex_data
+        return
