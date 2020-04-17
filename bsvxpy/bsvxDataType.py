@@ -7,6 +7,18 @@ class bsvxDataType:
     _hex_data = None # (int, base 16) the hex representation of the data
     _data = None    # (Subclass dependent) the data representation in the "correct" type, i.e. int for ShortInt, string for ShortString, etc.
     _mask = None    # (int, base 2) corresponding bits in the input byte used to encode length or data
+    _data_types_list = {
+        0:'blank',
+        1:'string',
+        128:'string_long',
+        135:'int_short',
+        144:'int_long',
+        152:'float',
+        160:'blob',
+        168:'header',
+        184:'header_long',
+        192:'record',
+        208:'record_long'} # permanent spot for parsing data types, static list of all types and their values.
     
     # Constructor
     # -----------
