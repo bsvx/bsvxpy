@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
-from .bsvxDataType import bsvxDataType
+import bsvxpy
 
 class Reader:
     """
     Takes in a .bsvx file and returns a reader object that can iterate over
     rows in a given bsvxfile
     """
+    _bsvxfile_path = ""
+    _text_buf = ""
+
 
     def __init__(self, bsvxfile):
         """
@@ -17,16 +20,79 @@ class Reader:
         self._bsvxfile_path = bsvxfile
 
     def read(self):
+        obj_list = []
         file_obj = open(self._bsvxfile_path, "r")
-        text_buf = file_obj.readrow() #change to read in 2 characters as integers
-        self._parse_type(text_buf)
-    
-    def _parse_type(self, text_buffer):
-        field_length = self._hex_to_dec(text_buffer[:2])
-        for i in range(0, field_length): # field_length is how many records are in each row
+        self._text_buf = file_obj.readline() # Read first row of the file, and any subsequent rows later
+        length = self._parse_length(0)
+        text_index = 2 # after the first two characters for row length are read in, we begin reading object data from the 2nd index
+        for i in range(0, int(length)): # field_length is how many records are in each row
             #iterate over the row
-            pass # implement switching on type
+            text_index = self._parse_data(text_index, obj_list)
+    
+    def _parse_length(self, text_index):
+        return self._hex_to_dec(self._text_buf[text_index:text_index + 2])
 
+    def _parse_data(self, text_index, object_list):
+        new_index = text_index # update and return text_index as we go along to keep track of the beginning of a new object
+        obj_length = self._parse_length(new_index) # find length of object
+        obj_length = int(obj_length)
+        new_index = new_index + 2 # iterate index
+        obj_type = self._parse_type(obj_length) # find type of object given length
+        obj_data = self._text_buf[new_index:new_index + (obj_length * 2)]
+        object_list.append(self._init_bsv_object(obj_type, obj_data))
+        return new_index + (obj_length * 2)
+
+    def _parse_type(self, obj_length):
+        if 0 <= obj_length < 1:
+            return bsvxpy.bsvxDataType._data_types_list[0]
+        elif 1 <= obj_length < 128:
+            return bsvxpy.bsvxDataType._data_types_list[1]
+        elif 128 <= obj_length < 135:
+            return bsvxpy.bsvxDataType._data_types_list[2]
+        elif 135 <= obj_length < 144:
+            return bsvxpy.bsvxDataType._data_types_list[3]
+        elif 144 <= obj_length < 152:
+            return bsvxpy.bsvxDataType._data_types_list[4]
+        elif 152 <= obj_length < 160:
+            return bsvxpy.bsvxDataType._data_types_list[5]
+        elif 160 <= obj_length < 168:
+            return bsvxpy.bsvxDataType._data_types_list[6]
+        elif 168 <= obj_length < 184:
+            return bsvxpy.bsvxDataType._data_types_list[7]
+        elif 184 <= obj_length < 192:
+            return bsvxpy.bsvxDataType._data_types_list[8]
+        elif 192 <= obj_length < 208:
+            return bsvxpy.bsvxDataType._data_types_list[9]
+        elif 208 <= obj_length < 216:
+            return bsvxpy.bsvxDataType._data_types_list[10]
+        else:
+            return -1
+
+    def _init_bsv_object(self, obj_type, obj_data):
+        if obj_type == "blank":
+            return bsvxpy.Blank()
+        elif obj_type == "string":
+            return bsvxpy.StringShort(obj_data)
+        elif obj_type == "string_long":
+            return bsvxpy.StringLong(obj_data)
+        elif obj_type == "int_short":
+            return bsvxpy.IntegerShort(obj_data)
+        elif obj_type == "int_long":
+            return bsvxpy.IntegerLong(obj_data)
+        elif obj_type == "float":
+            return bsvxpy.Float(obj_data)
+        elif obj_type == "blob":
+            return bsvxpy.Blob(obj_data)
+        elif obj_type == "header":
+            return bsvxpy.Header(obj_data)
+        elif obj_type == "header_long":
+            return bsvxpy.HeaderLong(obj_data)
+        elif obj_type == "record":
+            return bsvxpy.Record(obj_data)
+        elif obj_type == "record_long":
+            return bsvxpy.RecordLong(obj_data)
+        elif obj_type == "reserved":
+            return -1
 
     def _hex_to_dec(self, hex_string):
         i = int(hex_string, 16)

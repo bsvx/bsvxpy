@@ -18,7 +18,8 @@ class bsvxDataType:
         168:'header',
         184:'header_long',
         192:'record',
-        208:'record_long'} # permanent spot for parsing data types, static list of all types and their values.
+        208:'record_long',
+        216:'reserved'} # permanent spot for parsing data types, static list of all types and their values.
 
     
     # Constructor
