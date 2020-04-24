@@ -19,9 +19,9 @@ class Float(bsvxDataType):
         # Determines the Precision of the float       (E/M, bias)              Exponent bits / Significand bits
         # -----------------------------------------------------------------------------------------------------
         if self._precision == Precision.SINGLE:     # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
-            self._length = 8
+            self._length = 4
         elif self._precision == Precision.DOUBLE:   # (11/53, exp. bias: 1023) 0000 0000 000 / 0 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
-            self._length = 16
+            self._length = 8
 
     # Helper Functions
     # ----------------
