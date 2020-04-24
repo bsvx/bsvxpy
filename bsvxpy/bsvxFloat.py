@@ -14,14 +14,14 @@ class Float(bsvxDataType):
     _precision = None       # Stores the float's precision. Preserves role of _length
 
     def __init__(self, input):
-        self._precision = input & self._mask
+        self._precision = int(input, 16) & self._mask
 
         # Determines the Precision of the float       (E/M, bias)              Exponent bits / Significand bits
         # -----------------------------------------------------------------------------------------------------
-        if self._precision == Precision.SINGLE:   # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
-            self._length = 8
+        if self._precision == Precision.SINGLE:     # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
+            self._length = 4
         elif self._precision == Precision.DOUBLE:   # (11/53, exp. bias: 1023) 0000 0000 000 / 0 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
-            self._length = 16
+            self._length = 8
 
     # Helper Functions
     # ----------------
