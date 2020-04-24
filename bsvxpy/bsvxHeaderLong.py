@@ -10,7 +10,7 @@ class HeaderLong(Header):
     def __init__(self, input):
         # A Long Header uses 1-8 bytes of data to represent its 'field_count'
         # (input & _mask) maps to integer values [0 - 7], + 1 to shift the range
-        self._long_length = (input & self._mask) + 1
+        self._long_length = (int(input, 16) & self._mask) + 1
         return
 
     # Helper Functions

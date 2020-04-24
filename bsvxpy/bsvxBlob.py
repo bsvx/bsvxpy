@@ -10,7 +10,7 @@ class Blob(bsvxDataType):
     def __init__(self, input):
         # A Blob uses 1-8 bytes of data to represent a value
         # (input & _mask) maps to integer values [0 - 7], + 1 to shift the range
-        self._long_length = (input & self._mask) + 1
+        self._long_length = (int(input, 16) & self._mask) + 1
         return
 
     # Accessor Functions

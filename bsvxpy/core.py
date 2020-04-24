@@ -48,23 +48,23 @@ class Reader:
         elif 1 <= obj_length < 128:
             return bsvxpy.bsvxDataType._data_types_list[1]
         elif 128 <= obj_length < 135:
-            return bsvxpy.bsvxDataType._data_types_list[2]
+            return bsvxpy.bsvxDataType._data_types_list[128]
         elif 135 <= obj_length < 144:
-            return bsvxpy.bsvxDataType._data_types_list[3]
+            return bsvxpy.bsvxDataType._data_types_list[135]
         elif 144 <= obj_length < 152:
-            return bsvxpy.bsvxDataType._data_types_list[4]
+            return bsvxpy.bsvxDataType._data_types_list[144]
         elif 152 <= obj_length < 160:
-            return bsvxpy.bsvxDataType._data_types_list[5]
+            return bsvxpy.bsvxDataType._data_types_list[152]
         elif 160 <= obj_length < 168:
-            return bsvxpy.bsvxDataType._data_types_list[6]
+            return bsvxpy.bsvxDataType._data_types_list[160]
         elif 168 <= obj_length < 184:
-            return bsvxpy.bsvxDataType._data_types_list[7]
+            return bsvxpy.bsvxDataType._data_types_list[168]
         elif 184 <= obj_length < 192:
-            return bsvxpy.bsvxDataType._data_types_list[8]
+            return bsvxpy.bsvxDataType._data_types_list[184]
         elif 192 <= obj_length < 208:
-            return bsvxpy.bsvxDataType._data_types_list[9]
+            return bsvxpy.bsvxDataType._data_types_list[192]
         elif 208 <= obj_length < 216:
-            return bsvxpy.bsvxDataType._data_types_list[10]
+            return bsvxpy.bsvxDataType._data_types_list[208]
         else:
             return -1
 
@@ -95,6 +95,8 @@ class Reader:
             return -1
 
     def _hex_to_dec(self, hex_string):
+        if hex_string == '':
+            hex_string = '0'
         i = int(hex_string, 16)
         return str(i)
 
