@@ -120,19 +120,19 @@ class Writer:
         return True
     
         type = self.get_type()
-		length = self.get_length()
+	length = self.get_length()
 		
-		data.to_binary_encoding(data)
-		if(f = open(bsvxfile, 'ab') != 1)
-			raise Exception("Failed to open file for appending bytes. File given: " + bsvxfile)
+	self.to_binary_encoding(self)
+	if(f = open(bsvxfile, 'ab') != 1)
+		raise Exception("Failed to open file for appending bytes. File given: " + bsvxfile)
 		
-		#this needs a switch statement or if-else similar to parse_type. 
-		#I'll implement it tonight but I didn't have time.
-		#this should work for short string and long int
-		f.write(bytes[data.get_hex_data()])
-		if(type >= 1 && type <= 127)
-			f.write(bytes(data.get_data(), 'utf-8')
-		elif(type >= 144 && type <= 151)
-			f.write(bytes[data.get_data()])
+	#this needs a switch statement or if-else similar to parse_type. 
+	#I'll implement it tonight but I didn't have time.
+	#this might work for short string and long int
+	f.write(bytes[type])
+	if(type >= 1 && type <= 127)
+		f.write(bytes(data.get_data(), 'utf-8')
+	elif(type >= 144 && type <= 151)
+		f.write(bytes[data.get_data()])
 		
-		f.close()
+	f.close()
