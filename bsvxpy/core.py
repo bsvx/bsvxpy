@@ -119,20 +119,21 @@ class Writer:
             raise Exception("File supplied to writerow is not a .bsvx file. File directory given:{}".format(bsvxfile))
         return True
     
-        type = self.get_type()
-		length = self.get_length()
-		
-		data.to_binary_encoding(data)
-		if(f = open(bsvxfile, 'ab') != 1)
-			raise Exception("Failed to open file for appending bytes. File given: " + bsvxfile)
-		
-		#this needs a switch statement or if-else similar to parse_type. 
-		#I'll implement it tonight but I didn't have time.
-		#this should work for short string and long int
-		f.write(bytes[data.get_hex_data()])
-		if(type >= 1 && type <= 127)
-			f.write(bytes(data.get_data(), 'utf-8')
-		elif(type >= 144 && type <= 151)
-			f.write(bytes[data.get_data()])
-		
-		f.close()
+        # type = self.get_type()
+        # length = self.get_length()
+        
+        # data.to_binary_encoding(data)
+        # f = open(bsvxfile, 'ab')
+        # if(f != 1):
+        #     raise Exception("Failed to open file for appending bytes. File given: " + bsvxfile)
+        
+        # #this needs a switch statement or if-else similar to parse_type. 
+        # #I'll implement it tonight but I didn't have time.
+        # #this should work for short string and long int
+        # f.write(bytes[data.get_hex_data()])
+        # if(type >= 1 and type <= 127):
+        #     f.write(bytes(data.get_data(), 'utf-8'))
+        # elif(type >= 144 and type <= 151):
+        #     f.write(bytes[data.get_data()])
+        
+        # f.close()

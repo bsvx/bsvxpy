@@ -36,11 +36,11 @@ class bsvxDataType:
     def get_data(self):     # Returns the stored _data variable as a base 16 int
         return self._data
 
-    def get_hex_data(self)
-		return self._hex_data
-	
-	def get_type(self)
-		return self._input
+    def get_hex_data(self):
+        return self._hex_data
+    
+    def get_type(self):
+        return self._input
     # I/O Functions
     # -------------
     # fileHandle: the file handle associated with an OPEN file
