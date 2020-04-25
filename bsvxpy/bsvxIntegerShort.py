@@ -11,8 +11,13 @@ class IntegerShort(bsvxDataType):
     # __init__ structure preserved for congruency throughout library
     def __init__(self, input):
         bsvxDataType.__init__(self, input)
-        self._length = 0                             # Short Int does not read data from file
-        self._data = int(input, 16) & self._mask # hex_data is the 0 - 7 value encoded in the input byte
-        # The above line returns 0 for when I try to instantiate an object, commenting it out for now.
+        self._length = 0
+        
+        try:                                            # HEX BYTE FOR READING FROM FILE
+            self._data = int(input, 16) & self._mask
+            self._hex_data = str(self._data)
+        except TypeError:                               # REGULAR INTEGER INPUT
+            self._data = input          # Because IntegerShort only corresponds to decimal values 0-7
+            self._hex_data = input      # both _data and _hex_data will be the same
         
         return
