@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from .bsvxDataType import bsvxDataType
 from .bsvxStringShort import StringShort
 
 class StringLong(StringShort):
@@ -9,8 +10,20 @@ class StringLong(StringShort):
 
     def __init__(self, input):
         bsvxDataType.__init__(self, input)
-        self._long_length = int(input, 16) & self._mask
-        return
+
+        if type(input) is int:                                  # REGULAR STRING INPUT
+            self._data = input
+            self._hex_data = hex(input).lstrip('0x')
+            self._length = len(self._hex_data) / 2
+            return
+        
+        input.lstrip('0x')
+        if len(input) > 2:                                  # HEX WITH LEADING LENGTH VALUE
+            self._length = int(input[0:1], 16)
+            self._hex_data = input[1:len(input)]
+            self.from_binary_encoding()
+        else:                                               # HEX BYTE FOR READING FROM FILE
+            self._long_length = (int(input, 16) & self._mask) + 1
 
     # "Long" datatypes require a read operation to fetch 'length'
     def read_length(self, fileHandle):
