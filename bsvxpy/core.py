@@ -118,7 +118,7 @@ class Writer:
         if not bsvxfile.endswith(".bsvx"):
             raise Exception("File supplied to writerow is not a .bsvx file. File directory given:{}".format(bsvxfile))
         return True
-    
+
         # type = self.get_type()
         # length = self.get_length()
         
@@ -137,3 +137,4 @@ class Writer:
         #     f.write(bytes[data.get_data()])
         
         # f.close()
+
