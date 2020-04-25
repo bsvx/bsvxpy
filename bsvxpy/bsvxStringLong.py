@@ -8,6 +8,7 @@ class StringLong(StringShort):
     _long_length = None     # Intermediate variable used to store the length of the bytes that encode the length of the string
 
     def __init__(self, input):
+        bsvxDataType.__init__(self, input)
         self._long_length = int(input, 16) & self._mask
         return
 

@@ -7,6 +7,7 @@ class StringShort(bsvxDataType):
     _mask = int('01111111', 2)
 
     def __init__(self, input):
+        bsvxDataType.__init__(self, input)
         self._length = int(input, 16) & self._mask
 
     # From UTF-8 String to Hex

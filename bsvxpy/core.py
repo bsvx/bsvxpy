@@ -28,6 +28,7 @@ class Reader:
         for i in range(0, int(length)): # field_length is how many records are in each row
             #iterate over the row
             text_index = self._parse_data(text_index, obj_list)
+        return obj_list
     
     def _parse_length(self, text_index):
         return self._hex_to_dec(self._text_buf[text_index:text_index + 2])

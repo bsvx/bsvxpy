@@ -24,8 +24,8 @@ class bsvxDataType:
     
     # Constructor
     # -----------
-    def __init__(self):
-        return
+    def __init__(self, hex_data):
+        self._hex_data = hex_data
 
     # Accessor Functions
     # ------------------

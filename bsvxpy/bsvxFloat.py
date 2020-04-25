@@ -14,6 +14,7 @@ class Float(bsvxDataType):
     _precision = None       # Stores the float's precision. Preserves role of _length
 
     def __init__(self, input):
+        bsvxDataType.__init__(self, input)
         self._precision = int(input, 16) & self._mask
 
         # Determines the Precision of the float       (E/M, bias)              Exponent bits / Significand bits

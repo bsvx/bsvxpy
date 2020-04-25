@@ -8,6 +8,7 @@ class HeaderLong(Header):
     _long_length = None     # Intermediate variable used to store the length of the bytes that encode the length of the 'field_count'
 
     def __init__(self, input):
+        bsvxDataType.__init__(self, input)
         # A Long Header uses 1-8 bytes of data to represent its 'field_count'
         # (input & _mask) maps to integer values [0 - 7], + 1 to shift the range
         self._long_length = (int(input, 16) & self._mask) + 1

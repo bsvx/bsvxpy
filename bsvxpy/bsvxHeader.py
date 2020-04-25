@@ -8,6 +8,7 @@ class Header(bsvxDataType):
     _field_count = None     # Number of fields associated with this Header
     
     def __init__(self, input):
+        bsvxDataType.__init__(self, input)
         self._field_count = int(input, 16) & self._mask
 
     # Accessor Functions
