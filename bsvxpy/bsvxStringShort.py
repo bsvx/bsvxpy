@@ -8,18 +8,15 @@ class StringShort(bsvxDataType):
 
     def __init__(self, input):
         bsvxDataType.__init__(self, input)
-        try:
-            input = input.lstrip('0x')                          # Make sure there is no leading '0x' on the hex input
-            if len(input) > 2:                                  # HEX WITH LEADING LENGTH VALUE
-                self._length = int(input[0:1], 16)
-                self._hex_data = input[1:len(input)]
-                self.from_binary_encoding()
-            else:                                               # HEX BYTE FOR READING FROM FILE
-                self._length = int(input, 16) & self._mask
+        try:                                                    # HEX BYTE FOR READING FROM FILE
+            self._length = int(input, 16) & self._mask
         except ValueError:                                      # REGULAR STRING INPUT
             self._length = len(input)
             self._data = input
-            self._hex_data = input.hex()
+            self._hex_data = bytes.hex(input.encode('utf-8'))
+
+    def set_data(self, data=None):
+        self.from_binary_encoding(data)
 
     # From UTF-8 String to Hex
     def to_binary_encoding(self):
@@ -27,7 +24,9 @@ class StringShort(bsvxDataType):
         return 
     
     # From Hex to UTF-8 String
-    def from_binary_encoding(self):
-        print(self._hex_data)
-        self._data = bytes.fromhex(self._hex_data).decode('utf-8')
+    def from_binary_encoding(self, data = None):
+        if data != None:
+            self._data = str(bytes.fromhex(data).decode('utf-8'))
+        else:
+            self._data = str(bytes.fromhex(self._hex_data).decode('utf-8'))
         return

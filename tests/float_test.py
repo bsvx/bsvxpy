@@ -18,12 +18,4 @@ init_float_dec = bsv.Float(float_dec)
 
 def test_float_dec():
     assert init_float_dec.get_data() == 3.625
-    assert init_float_dec.get_hex_data() == float(3.625).hex().lstrip('0x')
-
-# bsvxFloat does not support alternate hex encoding, and will throw an AttributeError exception when the
-#   user attempts to initialize an object with one
-float_alt_hex = '0440680000'
-
-def test_float_alt_hex():
-    with pytest.raises(AttributeError):
-        bsv.Float(float_alt_hex)
+    assert init_float_dec.get_hex_data() == float(3.625).hex()

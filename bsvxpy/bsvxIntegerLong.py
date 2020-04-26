@@ -11,20 +11,19 @@ class IntegerLong(IntegerShort):
         # A Long Integer uses 1-8 bytes of data to represent a value
         # (input & _mask) maps to integer values [0 - 7], + 1 to shift the range
         
-        if type(input) is int:                      # REGULAR INTEGER INPUT
+        if type(input) is int:                        # REGULAR INTEGER INPUT
             self._data = input
             self._hex_data = hex(input).lstrip('0x')
             self._length = len(self._hex_data)
-            return
-
-        # If input is not an integer, then it is a string
-        input = input.lstrip('0x')
-        if len(input) > 2:                          # HEX BYTE WITH LEADING LENGTH VALUE
-            self._length = int(input[0:1], 16)
-            self._hex_data = input[1:len(input)]
-            self._data = int(self._hex_data, 16)
-        else:                                       # HEX BYTE FOR READING FROM FILE
+        else:                                         # HEX BYTE FOR READING FROM FILE
             self._length = (int(input, 16) & self._mask) + 1
+
+    def set_data(self, data=None):
+        if data != None:
+            self.from_zigzag(int(data, 16))
+            return
+        self.from_zigzag(int(self._hex_data, 16))
+        return
 
 
     def from_zigzag(self, data):

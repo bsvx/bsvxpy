@@ -21,7 +21,7 @@ class bsvxDataType:
         192:'record',
         208:'record_long',
         216:'reserved'} # permanent spot for parsing data types, static list of all types and their values.
-
+    _long_type = False
     
     # Constructor
     # -----------
@@ -41,6 +41,16 @@ class bsvxDataType:
     
     def get_type(self):
         return self._input
+
+    def is_long(self):
+        return self._long_type
+
+    # Mutator Functions
+    # ------------------
+    def set_hex_data(self, data):
+        self._hex_data = data
+        return
+    
     # I/O Functions
     # -------------
     # fileHandle: the file handle associated with an OPEN file
