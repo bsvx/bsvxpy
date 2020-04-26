@@ -3,7 +3,7 @@
 class bsvxDataType:
     # Private Member variables
     # ------------------------
-    _input = None #(int, base 10) the type 0-255. See _data_types_list for reference
+    _input = None # (int, base 10) the type [0-255]. See _data_types_list for reference
     _length = None  # (int, base 10) the number of bytes we need to read after reading the size bit 
     _hex_data = None # (int, base 16) the hex representation of the data
     _data = None    # (Subclass dependent) the data representation in the "correct" type, i.e. int for ShortInt, string for ShortString, etc.
@@ -52,9 +52,9 @@ class bsvxDataType:
             # Convert input to a base 16 int
             pass
         else:               # Read from a .bsv file
-            input = fileHandle.read(length) # Already in base 16 format
+            _input = fileHandle.read(length) # Already in base 16 format
 
-        return input
+        return _input
     
     def write(self, fileHandle):
             fileHandle.write(self._data)
