@@ -15,14 +15,25 @@ class Float(bsvxDataType):
 
     def __init__(self, input):
         bsvxDataType.__init__(self, input)
-        self._precision = int(input, 16) & self._mask
+        self._precision = None              # Default value to handle when we don't know the precision of the float
 
-        # Determines the Precision of the float       (E/M, bias)              Exponent bits / Significand bits
-        # -----------------------------------------------------------------------------------------------------
-        if self._precision == Precision.SINGLE:     # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
-            self._length = 4
-        elif self._precision == Precision.DOUBLE:   # (11/53, exp. bias: 1023) 0000 0000 000 / 0 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
-            self._length = 8
+        if type(input) is float:
+            self._length = None
+            self._precision = None
+            self._data = input
+            self._hex_data = input.hex().lstrip('0x')
+        else:                               # Floats do not support alt hex encoding (LLXXXXXXXX...)
+            if len(input) > 2:
+                raise AttributeError("bsvxFloat does not support alt. hex encoding")
+            else:
+                self._precision = int(input, 16) & self._mask
+
+                # Determines the Precision of the float       (E/M, bias)              Exponent bits / Significand bits
+                # -----------------------------------------------------------------------------------------------------
+                if self._precision == Precision.SINGLE:     # (8/24, exp. bias: 127)       0000 0000 / 0000 0000 0000 0000 0000 0000
+                    self._length = 4
+                elif self._precision == Precision.DOUBLE:   # (11/53, exp. bias: 1023) 0000 0000 000 / 0 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+                    self._length = 8
 
     # Helper Functions
     # ----------------
